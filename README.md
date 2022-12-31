@@ -79,16 +79,6 @@ The REST API to the example app is described below.
     - Maksimal 10 juta
 
 <<<<<<< HEAD
-
-### Body
-
-    {
-        "name": "Cranel Bell",
-        "salary": 5000000
-    }
-
-=======
-
 ### Body
 
     {
