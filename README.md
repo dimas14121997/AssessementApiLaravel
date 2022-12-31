@@ -1,64 +1,393 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Assessment REST API Overtime App
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Setup yang dibutuhkan untuk menjalankan Api
 
-## About Laravel
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Untuk menjalankan testing
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+./vendor/bin/phpunit
+atau
+php artisan serve
+atau
+php artisan test
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# REST API
 
-## Learning Laravel
+The REST API to the example app is described below.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Get list of Employees
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Request
 
-## Laravel Sponsors
+`GET /api/employees`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Response
 
-### Premium Partners
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "id": 1,
+                "name": "Dimas reynaldi",
+                "salary": 3000000
+            },
+            {
+                "id": 2,
+                "name": "Reynaldi akcerman",
+                "salary": 3200000
+            },
+            {
+                "id": 3,
+                "name": "Jenniie",
+                "salary": 2000000
+            },
+            {
+                "id": 4,
+                "name": "Rosee",
+                "salary": 3000000
+            },
+            {
+                "id": 5,
+                "name": "Andika Kangen Band",
+                "salary": 2500000
+            }
+        ]
+    }
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Create a new Employee
 
-## Contributing
+### Request
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`POST /api/employees`
 
-## Code of Conduct
+### Rule
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    name
+    - String
+    - Minimal 2 karakter
+    - Harus unik
+    salary
+    - Integer
+    - Minimal 2 juta
+    - Maksimal 10 juta
 
-## Security Vulnerabilities
+<<<<<<< HEAD
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Body
 
-## License
+    {
+        "name": "Cranel Bell",
+        "salary": 5000000
+    }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+
+### Body
+
+    {
+        "name": "Sandhika",
+        "salary": 6000000
+    }
+
+> > > > > > > 
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "id": 6,
+                "name": "Sandhika",
+                "salary": 6000000
+            }
+        ]
+    }
+
+## Update Setting
+
+### Request
+
+`PATCH /api/settings`
+
+### Rule
+
+    key
+    - Hanya bisa diisi `overtime_method`.
+    value
+    - Hanya bisa diisi oleh nilai dari `references`.`id` dengan kriteria `code` = `overtime_method`.
+
+### Body
+
+    {
+        "key": "overtime_method",
+        "value": 2
+    }
+
+<<<<<<< HEAD
+
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "key": "overtime_method",
+                "value": 2
+            }
+        ]
+    }
+
+## Create a new Overtime
+
+### Request
+
+`POST /api/overtimes`
+
+### Rule
+
+    employee_id
+    - Integer
+    - Sesuai dengan yang ada di `employees`.`id`
+    date
+    - Date
+    - Tidak boleh ada `date` yang sama pada `employee_id` tersebut
+    time_started
+    - Format HH:mm
+    - Tidak boleh lebih dari `time_ended`
+    time_ended
+    - Format HH:mm
+    - Tidak boleh kurang dari `time_started`
+
+### Body
+
+    {
+        "employee_id": 1,
+        "date": "2022-09-14",
+        "time_started": "10:08",
+        "time_ended": "12:09"
+    }
+
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "id": 7,
+                "employee_id": 1,
+                "date": "2022-09-14",
+                "time_started": "10:08:00",
+                "time_ended": "12:09:00"
+            }
+        ]
+    }
+
+## Get list of Overtimes
+
+### Request
+
+`GET /api/overtime-pays/calculate/{month}`
+
+Contohnya
+http://127.0.0.1:8000/api/overtime-pays/calculate/2022-09
+
+### Rule
+
+=======
+
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "key": "overtime_method",
+                "value": 2
+            }
+        ]
+    }
+
+## Create a new Overtime
+
+### Request
+
+`POST /api/overtimes`
+
+### Rule
+
+    employee_id
+    - Integer
+    - Sesuai dengan yang ada di `employees`.`id`
+    date
+    - Date
+    - Tidak boleh ada `date` yang sama pada `employee_id` tersebut
+    time_started
+    - Format HH:mm
+    - Tidak boleh lebih dari `time_ended`
+    time_ended
+    - Format HH:mm
+    - Tidak boleh kurang dari `time_started`
+
+### Body
+
+    {
+        "employee_id": 1,
+        "date": "2022-09-14",
+        "time_started": "10:08",
+        "time_ended": "12:09"
+    }
+
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "id": 7,
+                "employee_id": 1,
+                "date": "2022-09-14",
+                "time_started": "10:08:00",
+                "time_ended": "12:09:00"
+            }
+        ]
+    }
+
+## Get list of Overtimes
+
+### Request
+
+`GET /api/overtime-pays/calculate/{month}`
+
+Contohnya
+http://127.0.0.1:8000/api/overtime-pays/calculate/2022-09
+
+### Rule
+
+> > > > > > > d2f4966c0d1748e66eb24dc02857a69f3e199cbf
+    month
+    - Format YYYY-MM
+
+### Response
+
+    {
+        "code": 200,
+        "message": "Success",
+        "data": [
+            {
+                "id": 1,
+                "name": "Novaldi Sandi",
+                "salary": 2000000,
+                "overtimes": [
+                    {
+                        "id": 1,
+                        "date": "2022-09-13",
+                        "time_started": "10:00:00",
+                        "time_ended": "12:00:00",
+                        "overtime_duration": 2
+                    },
+                    {
+                        "id": 3,
+                        "date": "2022-09-13",
+                        "time_started": "13:00:00",
+                        "time_ended": "15:30:00",
+                        "overtime_duration": 2
+                    },
+                    {
+                        "id": 5,
+                        "date": "2022-09-13",
+                        "time_started": "10:08:00",
+                        "time_ended": "12:09:00",
+                        "overtime_duration": 2
+                    },
+                    {
+                        "id": 6,
+                        "date": "2022-09-13",
+                        "time_started": "10:08:00",
+                        "time_ended": "12:09:00",
+                        "overtime_duration": 2
+                    },
+                    {
+                        "id": 7,
+                        "date": "2022-09-14",
+                        "time_started": "10:08:00",
+                        "time_ended": "12:09:00",
+                        "overtime_duration": 2
+                    }
+                ],
+                "overtime_duration_total": 10,
+                "amount": 100000
+            },
+            {
+                "id": 2,
+                "name": "Kazuto Kirigaya",
+                "salary": 2500000,
+                "overtimes": [
+                    {
+                        "id": 4,
+                        "date": "2022-09-13",
+                        "time_started": "10:30:00",
+                        "time_ended": "14:00:00",
+                        "overtime_duration": 3
+                    }
+                ],
+                "overtime_duration_total": 3,
+                "amount": 30000
+            },
+            {
+                "id": 3,
+                "name": "Hikigaya Hachiman",
+                "salary": 3000000,
+                "overtimes": [
+                    {
+                        "id": 2,
+                        "date": "2022-09-13",
+                        "time_started": "07:00:00",
+                        "time_ended": "09:45:00",
+                        "overtime_duration": 2
+                    }
+                ],
+                "overtime_duration_total": 2,
+                "amount": 20000
+            },
+            {
+                "id": 4,
+                "name": "Sakuta Azusagawa",
+                "salary": 4000000,
+                "overtimes": [],
+                "overtime_duration_total": 0,
+                "amount": 0
+            },
+            {
+                "id": 5,
+                "name": "Novaldi Sandi Ago",
+                "salary": 2500000,
+                "overtimes": [],
+                "overtime_duration_total": 0,
+                "amount": 0
+            },
+            {
+                "id": 6,
+                "name": "Cranel Bell",
+                "salary": 5000000,
+                "overtimes": [],
+                "overtime_duration_total": 0,
+                "amount": 0
+            }
+        ]
+    }
+
+### Jika Request tidak memenuhi Rule, maka akan mengembalikan Bad Request/Not Found
+
+## Terima Kasih
