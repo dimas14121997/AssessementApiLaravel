@@ -1,0 +1,282 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Backend Assesment Api Dimas Reynaldi Dwi Santoso",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "employees"
+                ],
+                "summary": "Get list of employees",
+                "description": "Returns list of employees",
+                "operationId": "getemployeesList",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "number of employee of each page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "5"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "current page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "parameter for order",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "name"
+                    },
+                    {
+                        "name": "order_type",
+                        "in": "query",
+                        "description": "order method",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "ASC"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "employees"
+                ],
+                "summary": "Add employees",
+                "description": "Returns status",
+                "operationId": "addemployees",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "status_id": {
+                                        "type": "integer"
+                                    },
+                                    "salary": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "name": "Nama Orang",
+                                "status_id": "3",
+                                "salary": "5000000"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Recorded"
+                    },
+                    "422": {
+                        "description": "Validation Errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            }
+        },
+        "/api/overtimes": {
+            "get": {
+                "tags": [
+                    "overtimes"
+                ],
+                "summary": "Get list of overtimes",
+                "description": "Returns list of overtimes",
+                "operationId": "getovertimesList",
+                "parameters": [
+                    {
+                        "name": "date_started",
+                        "in": "query",
+                        "description": "started date",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-04-10"
+                    },
+                    {
+                        "name": "date_ended",
+                        "in": "query",
+                        "description": "ended date",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-04-12"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "overtimes"
+                ],
+                "summary": "Add overtimes",
+                "description": "Returns status",
+                "operationId": "addovertimes",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "employee_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "time_started": {
+                                        "type": "time",
+                                        "example": "08:21"
+                                    },
+                                    "time_ended": {
+                                        "type": "time",
+                                        "example": "11:38"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2022-04-11"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Recorded"
+                    },
+                    "422": {
+                        "description": "Validation Errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            }
+        },
+        "/api/overtime-pays/calculate": {
+            "get": {
+                "tags": [
+                    "overtimes"
+                ],
+                "summary": "Get list of calculated overtimes",
+                "description": "Returns list of calculated overtimes",
+                "operationId": "getcalculatedOvertimes",
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "month",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-04"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            }
+        },
+        "/api/settings": {
+            "patch": {
+                "tags": [
+                    "settings"
+                ],
+                "summary": "Change settings",
+                "description": "Change settings of the calculation method",
+                "operationId": "changesettings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "example": "overtime_method"
+                                    },
+                                    "value": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Data Recorded"
+                    },
+                    "422": {
+                        "description": "Validation Errors"
+                    },
+                    "500": {
+                        "description": "Server Errors"
+                    }
+                }
+            }
+        }
+    }
+}
